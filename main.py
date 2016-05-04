@@ -5,12 +5,15 @@ RUN_OUTPUT = False
 RUN_OUTPUT = True
 RUN_TEST_SPLIT = not RUN_OUTPUT
 
+COLS = [1,2,3,4,5,7,8,9]
+
 # Load training data
 train_labels = np.loadtxt(open("data/train.csv"), delimiter=',', usecols=[0], skiprows=1)
-train_data = np.loadtxt(open("data/train.csv"), delimiter=',', usecols=range(1, 9), skiprows=1)
+train_data = np.loadtxt(open("data/train.csv"), delimiter=',', usecols=COLS, skiprows=1)
 
 # Load data we should predict
-predict_data = np.loadtxt(open("data/test.csv"), delimiter=',', usecols=range(1, 9), skiprows=1)
+# Note: we still use 1-10 here because row 0 is an ID in this dataset (not the result we should be predicting)
+predict_data = np.loadtxt(open("data/test.csv"), delimiter=',', usecols=COLS, skiprows=1)
 
 # Make a super big combo dataset so we can make our onehot encoder learn all of our 
 total_data = []
@@ -28,7 +31,7 @@ encoder.fit(total_data)
 # 
 models = [
     (linear_model.LogisticRegression(C=3.5), 1),
-    (svm.SVC(kernel='rbf', C=2.2, probability=True), 0),
+    # (svm.SVC(kernel='rbf', C=2.2, probability=True), 0),
 ]
 
 # Run the test split version
