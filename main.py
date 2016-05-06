@@ -26,9 +26,9 @@ def main():
     # C: inverse regularization strength - larger number -> more fit data (but not overfit hopefully!)
     # 
     models = [
-        (linear_model.LogisticRegression(C=4.4), 0.85),
-        (ensemble.RandomForestClassifier(), 0.15),
-        # (svm.SVC(kernel='rbf', C=1.4, probability=True), 0.05),
+        (linear_model.LogisticRegression(C=4.4), 0.83),
+        (ensemble.RandomForestClassifier(), 0.12),
+        (svm.SVC(kernel='rbf', C=1.4, probability=True), 0.05),
     ]
 
     print "Running feature selection"
